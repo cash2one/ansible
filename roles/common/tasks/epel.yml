@@ -1,0 +1,5 @@
+---
+# Install RedHat EPEL repos
+#
+- name: Install epel
+  yum: name=epel-release state=present

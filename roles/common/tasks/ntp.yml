@@ -1,0 +1,8 @@
+---
+# Install ntpdate for sync time
+#
+- name: Install ntpdate
+  yum: name=ntpdate state=present
+
+- name: Install Cron schedule update time
+  cron: name="update time" hour=*/8 job="/usr/sbin/ntpdate 0.gentoo.pool.ntp.org"

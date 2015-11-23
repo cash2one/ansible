@@ -1,0 +1,7 @@
+---
+# version control server
+#
+- hosts: vcs
+  roles:
+     - common
+     - subversion

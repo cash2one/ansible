@@ -1,0 +1,5 @@
+---
+# subversion server soft package
+#
+- include: httpd.yml
+- include: mod.yml

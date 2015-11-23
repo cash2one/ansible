@@ -1,0 +1,11 @@
+---
+# 安装Apache Httpd服务器
+#
+- name: Install httpd
+  yum: name=httpd state=latest
+
+- name: Configure httpd
+  copy: src=httpd.conf dest=/etc/httpd/conf/httpd.conf.example01
+
+- name: Start httpd service
+  service: name=httpd state=started enabled=yes

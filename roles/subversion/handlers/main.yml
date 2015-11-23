@@ -1,0 +1,4 @@
+---
+# subversion server handlers
+#
+- include: httpd.yml

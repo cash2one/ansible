@@ -1,0 +1,13 @@
+---
+# Install Python pip
+#
+- name: Install python-pip
+  yum: name=python-pip state=present
+
+# Update pip
+- name: Update pip
+  command: pip install -U pip
+
+# update setuptools
+- name: Update setuptools
+  command: pip install -U setuptools

@@ -1,0 +1,10 @@
+---
+# Web Server
+#
+- hosts: webserver
+  vars:
+       httpd_listen_port: 80
+       httpd_server_name: "localhost"
+  roles:
+     - common
+     - web

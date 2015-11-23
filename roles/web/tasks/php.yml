@@ -1,0 +1,30 @@
+---
+# Install PHP Packages
+#
+- name: install php
+  yum: name={{ item }} state=present
+  with_items:
+    - php
+    - php-fpm
+    - php-mysql
+    - php-mbstring
+    - php-mcrypt
+    - php-xml
+    - php-pecl-memcache
+    - php-pecl-memcached
+
+# Configure php-fpm
+- name: configure php-fpm
+  copy: src=php-fpm.conf dest=/etc/php-fpm.conf
+  notify:
+  - restart php-fpm
+
+# Configure php-fpm
+- name: configure php-fpm
+  copy: src=www.conf dest=/etc/php-fpm.d/www.conf
+  notify:
+  - restart php-fpm
+
+# Start php-fpm
+- name: start php-fpm
+  service: name=php-fpm state=started enabled=yes

@@ -1,0 +1,17 @@
+---
+# install supervisor
+#
+- name: install supervisor
+  command: pip install supervisor
+
+# configure supervisor
+- name: create supervisor configure directory
+  file: path=/etc/supervisor.d state=directory
+
+# configure supervisor
+- name: configure supervisor
+  copy: src=supervisor.conf dest=/etc/supervisor.conf.example
+
+# start supervisord
+#- name: start supervisord
+#  command: /usr/bin/supervisord
