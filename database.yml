@@ -1,0 +1,7 @@
+---
+# Database server
+#
+- hosts: database
+  roles:
+     - common
+     - database

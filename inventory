@@ -4,7 +4,9 @@
 
 [webserver]
 192.168.122.103		ansible_ssh_user=root
-192.168.122.104		ansible_ssh_user=root
 
 [vcs]
 192.168.122.102		ansible_ssh_user=root
+
+[database]
+192.168.122.104		ansible_ssh_user=root

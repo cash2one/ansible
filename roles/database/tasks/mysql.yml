@@ -1,0 +1,19 @@
+---
+# Install MySQL Server
+#
+- name: Copy MySQL Repos File
+  copy: src=mysql-community-release-el6-5.noarch.rpm dest=/tmp/
+
+- name: Install MySQL Repos
+  yum: name=/tmp/mysql-community-release-el6-5.noarch.rpm state=present
+
+- name: Install MySQL Server
+  yum: name=mysql-server state=latest
+
+# TODO: 安装MySQL配置文件
+# MySQL Service
+- name: Start MySQL Service
+  service: name=mysqld state=started enabled=yes
+
+- name: Install Python MySQL library
+  yum: name=MySQL-python state=latest
