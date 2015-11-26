@@ -1,0 +1,6 @@
+[program:adminsvr]
+command = {{ dest_dir }}/adminsvr -f {{ dest_dir }}/adminsvr.cfg -d {{ dest_dir }}
+process_name = adminsvr
+directory = {{ dest_dir }}
+stdout_logfile=/tmp/adminsvr.log
+stdout_errfile=/tmp/adminsvr-error.log

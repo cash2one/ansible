@@ -10,3 +10,6 @@
 
 [database]
 192.168.122.104		ansible_ssh_user=root
+
+[production]
+10.1.0.40		    ansible_ssh_user=root

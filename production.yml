@@ -1,0 +1,15 @@
+---
+# 部署产品
+#
+- hosts: production
+  vars:
+       repos: http://10.1.0.20/repos/release/wyft/trunk/server
+       dest_dir: /home/server/wyft
+       svn_user: ""
+       svn_password: ""
+       username: "server"
+       xml_cfg_file: 650770c6-1c7d-45f2-9717-f90ef4378262.xml
+  roles:
+    - common
+    - production
+    - setup

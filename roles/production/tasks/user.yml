@@ -1,0 +1,5 @@
+---
+# Add New User
+#
+- name: Add New User
+  user: name={{ username }} state=present

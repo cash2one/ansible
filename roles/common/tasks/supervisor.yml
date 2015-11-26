@@ -6,11 +6,11 @@
 
 # configure supervisor
 - name: create supervisor configure directory
-  file: path=/etc/supervisor.d state=directory
+  file: path=/etc/supervisord.d state=directory
 
 # configure supervisor
 - name: configure supervisor
-  copy: src=supervisor.conf dest=/etc/supervisor.conf.example
+  copy: src=supervisord.conf dest=/etc/supervisord.conf
 
 # start supervisord
 #- name: start supervisord

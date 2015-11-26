@@ -1,0 +1,20 @@
+---
+# Install Production Configure File
+#
+- name: Copy Python Script
+  copy: src=quickcfg.py dest=/tmp
+
+- name: Copy XML Config File
+  copy: src={{ xml_cfg_file }} dest=/tmp
+
+# 将生成的配置文件放至svn目标目录
+- name: Generate Production Config
+  any_errors_fatal: true
+  command: python quickcfg.py {{ xml_cfg_file }} -t {{ dest_dir }}
+  args:
+    chdir: /tmp
+
+#- name: Delete Files
+#  command: rm -f quickcfg.py {{ xml_cfg_file }}
+#  args:
+#    chdir: /tmp

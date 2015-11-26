@@ -1,0 +1,8 @@
+---
+# Compile Source
+#
+- name: Compile Source Code
+  any_errors_fatal: true
+  command: {{ compile_script }}
+  args:
+    chdir: "{{ source_dir }}"

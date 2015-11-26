@@ -1,0 +1,23 @@
+<cluster_configuration name="dd_tmp" region_uid="1">
+	<maps sequence="1,2" dungeons="10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,600"/>
+	<dbsvr hostname="10.1.0.33" database="ares_clunicode" username="viivgame" password="viivgame"/>
+	<logdbsvr hostname="10.1.0.33" database="ares_cllogunicode" username="viivgame" password="viivgame"/>
+	<path svrpath="rez/server_path_xds.xml" scriptfolder="script"/>
+	<admin whitelist=""/>
+	<saleagent url="http://rainbowsvr/salegen/dmd_trunkf"/>
+	<authsvr0 type="password" url="http://aresvr/main/account_giscript" key="" extra=""/>
+	<authsvr1 type="token" url="http://aresvr/main/account_giscript" key=""/>
+	<awardsvr url="http://10.1.0.51/salegen/dmd_region"/>
+	<dynconfig url="http://10.1.0.9/config/ares_trunk_svr_param.xml"/>
+	<host ip="127.0.0.1" wanaddr="10.1.0.40">
+		<service type="gatesvr" port="59110"/>
+		<service type="gamesvr" port="49120" line="1" map="1,2"/>
+		<service type="npcsvr" line="1" map="1,2"/>
+		<service type="gamesvr" port="49121" line="2" map="1,2"/>
+		<service type="npcsvr" line="2" map="1,2"/>
+		<service type="tracksvr" port="49140"/>
+		<service type="chatsvr" port="49118"/>
+		<service type="loginsvr" port="49119" thread_count="10"/>
+		<service type="logsvr" port="49106"/>
+	</host>
+</cluster_configuration>
