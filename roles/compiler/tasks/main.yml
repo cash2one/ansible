@@ -1,8 +1,5 @@
 ---
-# Compile Source
+# 编译发布服务
 #
-- name: Compile Source Code
-  any_errors_fatal: true
-  command: {{ compile_script }}
-  args:
-    chdir: "{{ source_dir }}"
+- include: compile.yml
+- include: release.yml

@@ -1,0 +1,19 @@
+---
+# 编译并发布到内网VCS
+#
+- hosts: compiler
+  vars:
+       op_user: builder
+       compile_script: ./rebuild.sh           # 使用游戏相关的编译脚本
+       source_dir: /home/builder/ZS_BUILD
+       bin_src_dir: /home/builder/ZS_BUILD/bin/server
+       repos: http://10.1.0.20/repos/release/wyft
+       release_dir: /home/builder/wyft
+       svn_user: ""
+       svn_password: ""
+       db_host: 10.1.0.33
+       db_name: ares_clunicode
+       db_user: viivgame
+       db_password: viivgame
+  roles:
+     - compiler

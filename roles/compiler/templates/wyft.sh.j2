@@ -1,0 +1,96 @@
+#!/bin/bash
+
+#----------------------------------------------------------------------------
+# file: release.sh
+# author: liuhui
+# copyright: viiv.net
+# date: 2015-11-27 17:18:30
+# description: 用于发布服务端程序
+# 
+#
+#!!!!!!!!!!!!!!!!!! Attention:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+# 当前脚本导出了数据库中的GM指令表
+#
+#----------------------------------------------------------------------------
+
+#set -x
+
+DB_HOST={{ db_host }}
+DB_NAME={{ db_name }}
+ 
+#SRC_DIR="builder@10.1.0.23:~/ZS_BUILD/bin/server"
+#RELEASE_DIR="intranet/wyft/trunk"
+SRC_DIR={{ bin_src_dir }}
+RELEASE_DIR={{ release_dir }}/trunk            # 此值与仓库目录结构有关
+BIN_RELEASE="${RELEASE_DIR}/server"
+DB_RELEASE="${RELEASE_DIR}/database"
+
+mk_dest() {
+    if [[ ! -d $BIN_RELEASE ]]; then
+        mkdir -p $BIN_RELEASE
+    fi
+
+    if [[ ! -d $DB_RELEASE ]]; then
+        mkdir -p $DB_RELEASE
+    fi
+}
+
+copy_file() {
+	rsync -auvz "${SRC_DIR}/adminsvr"    "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/chatsvr"     "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/gamesvr"     "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/gatesvr"     "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/loginsvr"    "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/logsvr"      "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/npcsvr"      "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/tracksvr"    "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/embed_npcserver.py"  "$BIN_RELEASE"
+	rsync -auvz "${SRC_DIR}/version.sys"         "$BIN_RELEASE"
+
+	# cp -r "${SRC_DIR}/lib" "$RELEASE"
+    rsync -auvz --exclude-from=rsync.filter "${SRC_DIR}/lib" "$BIN_RELEASE"
+	rsync -auvz --exclude-from=rsync.filter "${SRC_DIR}/rez" "$BIN_RELEASE"
+	rsync -auvz --exclude-from=rsync.filter "${SRC_DIR}/script" "$BIN_RELEASE"
+
+	cd $BIN_RELEASE
+    TEMP_MD5SUM_FILE=`mktemp`
+    rm -f md5sum
+    find . -type f -iname '*.pyc' -exec rm -f {} \;
+    find . -type f -iname '*.pyo' -exec rm -f {} \;
+	find . -path '*.svn*' -prune -o -type f -exec md5sum {} \; > ${TEMP_MD5SUM_FILE}
+	mv ${TEMP_MD5SUM_FILE} md5sum
+
+    cp -uf ../tools/service .
+    cp -uf ../tools/check .
+	cd -
+}
+
+# 导出数据库
+dump_database() {
+    MYSLQDUMP=/usr/bin/mysqldump
+    # 数据库结构。不导出数据、数据库名
+    $MYSLQDUMP -h ${DB_HOST} -u{{ db_user }} -p{{ db_password }} -d -n ${DB_NAME} > "${DB_RELEASE}/init.sql"
+    # 服务端初始化参数表
+    $MYSLQDUMP -h ${DB_HOST} -u{{ db_user }} -p{{ db_password }} viivgame ares_clunicode svr_params > "${DB_RELEASE}/svr_params.sql"
+    # 角色排名相关数据
+    $MYSLQDUMP -h ${DB_HOST} -u{{ db_user }} -p{{ db_password }}  ares_clunicode char_rank_params > "${DB_RELEASE}/char_rank_params.sql"
+    # GM指令表
+    $MYSLQDUMP -h ${DB_HOST} -u{{ db_user }} -p{{ db_password }} ares_clunicode char_authority > "${DB_RELEASE}/char_authority.sql"
+
+    cd "${DB_RELEASE}"
+    md5sum *.sql > md5sum
+    cd -
+}
+
+#if [[ $1 == "-h" ]]; then
+#	usage
+#fi
+
+#mk_dest
+copy_file
+dump_database
+
+#echo "发布完成！"
+
+#set +x

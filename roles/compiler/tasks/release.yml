@@ -1,0 +1,30 @@
+---
+# 发布程序
+#
+- name: Checkout From Intranet VCS
+  become: yes
+  become_user: "{{ op_user }}"
+  subversion: repo={{ repos }} dest={{ release_dir }} username={{ svn_user }} password={{ svn_password }}
+
+- name: Copy Script
+  become: yes
+  become_user: "{{ op_user }}"
+  template: src=wyft.sh.j2 dest=/tmp/wyft.sh
+
+- name: Promote privi of script
+  command: chmod 0755 /tmp/wyft.sh
+
+- name: Prepare Program File
+  become: yes
+  become_user: "{{ op_user }}"
+  shell: /tmp/wyft.sh
+  args:
+      chdir: /tmp
+
+- name: Commit To Intranet VCS
+  become: yes
+  become_user: "{{ op_user }}"
+  shell: svn add . && svn ci -m 'update' .
+  args:
+      chdir: "{{ release_dir }}"
+

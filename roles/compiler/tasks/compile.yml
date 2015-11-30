@@ -1,0 +1,10 @@
+---
+# Compile Source
+#
+- name: Compile Source Code
+  any_errors_fatal: true
+  become: yes
+  become_user: "{{ op_user }}"
+  shell: "{{ compile_script }} &> /tmp/build.log"
+  args:
+    chdir: "{{ source_dir }}"
