@@ -5,8 +5,8 @@
 	<path svrpath="rez/server_path_xds.xml" scriptfolder="script"/>
 	<admin whitelist=""/>
 	<saleagent url="http://rainbowsvr/salegen/dmd_trunkf"/>
-	<authsvr0 type="password" url="http://aresvr/main/account_giscript" key="" extra=""/>
-	<authsvr1 type="token" url="http://aresvr/main/account_giscript" key=""/>
+	<authsvr0 type="password" url="http://10.1.0.9/main/account_giscript" key="" extra=""/>
+	<authsvr1 type="token" url="http://10.1.0.9/main/account_giscript" key=""/>
 	<awardsvr url="http://10.1.0.51/salegen/dmd_region"/>
 	<dynconfig url="http://10.1.0.9/config/ares_trunk_svr_param.xml"/>
 	<host ip="127.0.0.1" wanaddr="10.1.0.40">

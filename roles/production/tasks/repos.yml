@@ -4,7 +4,7 @@
 - name: Checkout Production
   subversion: repo={{ repos }} dest={{ dest_dir }} username={{ svn_user }} password={{ svn_password }}
   become: yes
-  become_user: "{{ username }}"
+  become_user: "{{ op_user }}"
 
 - name: Install configure file
   template: src=adminsvrd.j2 dest=/etc/supervisord.d/adminsvrd.ini

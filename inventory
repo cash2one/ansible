@@ -8,8 +8,11 @@
 [vcs]
 192.168.122.102		ansible_ssh_user=root
 
-[database]
-192.168.122.104		ansible_ssh_user=root
-
 [production]
 10.1.0.40		    ansible_ssh_user=root
+
+[compiler]
+10.1.0.41		    ansible_ssh_user=root
+
+[database]
+10.1.0.42		    ansible_ssh_user=root

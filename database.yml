@@ -2,6 +2,36 @@
 # Database server
 #
 - hosts: database
+  vars:
+       data_dir: /var/lib/mysql       
+       master_server_id: 2
+       db_name: wyft
+       repos_url: http://10.1.0.20/repos/release/wyft/trunk/database    # 数据库初始化文件
+       dest_dir: /tmp/database
+       svn_user: ""
+       svn_password: ""
+       init_db_script: "" # 初始化数据库
+       new_db_username: viivgame
+       new_db_password: viivgame
+       allow_host: 10.1.%.%
   roles:
      - common
      - database
+     - datamaster
+
+#- hosts: database_slave
+#  vars:
+#       data_dir: /var/lib/mysql       
+#       # master_server_id: 2
+#       db_name: wyft
+#       db_init_file: "" # 初始化SQL文件 initial_data_file.sql
+#       allow_host: 10.1.%.%
+#       master_host: ""
+#       master_user: ""
+#       master_password: ""
+#       master_log_file: ""
+#       master_log_pos: ""
+#  roles:
+#     - common
+#     - database
+#     - dataslave

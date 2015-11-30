@@ -2,4 +2,4 @@
 # Add New User
 #
 - name: Add New User
-  user: name={{ username }} state=present
+  user: name={{ op_user }} state=present
