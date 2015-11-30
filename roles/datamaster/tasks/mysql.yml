@@ -1,0 +1,32 @@
+---
+# Install  Master MySQL Server
+#
+- name: Install MySQL Configure File
+  template: src=master.j2 dest=/etc/my.cnf
+
+# MySQL Service
+- name: Start MySQL Service
+  service: name=mysqld state=started enabled=yes
+
+- name: Create Database
+  mysql_db: name={{ db_name }} state=present
+
+# Checkout Database Initial Data File
+- name: Checkout Database Initial Data File
+  subversion: repo={{ repos_url }} dest={{ dest_dir }} username={{ svn_user }} password={{ svn_password }}
+
+# Import Data
+- name: Initial Database Script
+  template: src=init_db.sh.j2 dest="{{ dest_dir }}/init_db.sh" mode=0755
+
+- name: Initial Database
+  shell: chdir={{ dest_dir }} ./init_db.sh &> init_db.log
+
+
+# Create MySQL User
+- name: Add MySQL User
+  mysql_user: name={{ new_db_username }} password={{ new_db_password }} host={{ allow_host }} priv={{ db_name }}.*:ALL state=present
+
+# MySQL Replication User
+#- name: Add MySQL User
+#  mysql_user: name={{ new_db_username }} password={{ new_db_password }} host={{ allow_host }} priv={{ db_name }}.*:ALL state=present

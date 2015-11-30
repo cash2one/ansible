@@ -10,10 +10,5 @@
 - name: Install MySQL Server
   yum: name=mysql-server state=latest
 
-# TODO: 安装MySQL配置文件
-# MySQL Service
-- name: Start MySQL Service
-  service: name=mysqld state=started enabled=yes
-
 - name: Install Python MySQL library
   yum: name=MySQL-python state=latest

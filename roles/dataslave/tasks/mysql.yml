@@ -1,0 +1,23 @@
+---
+# Install  Master MySQL Server
+#
+- name: Install MySQL Configure File
+  template: src=master.j2 dest=/etc/my.cnf
+
+# MySQL Service
+- name: Start MySQL Service
+  service: name=mysqld state=started enabled=yes
+
+- name: Copy Database Initial Data
+  copy: src=initial_data_file.sql dest=/tmp
+
+- name: Create Database
+  mysql_db: name={{ db_name }} state=present
+
+# Import Data
+- name: Initial Database
+  mysql_db: name={{ db_name }} state=import target=/tmp/initial_data_file.sql
+
+# Create MySQL Slave
+- name: Create MySQL Slave
+  mysql_replication: master_host={{ master_host }} master_user={{ master_user }} master_password={{ master_password }} master_log_file={{ master_log_file }} master_log_pos={{ master_log_pos }} mode=startslave

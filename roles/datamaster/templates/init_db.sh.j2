@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# -----------------------------------------------------------------------------
+# @file: init_db.sh
+# @author: root <root@xxxx.cn>
+# @datetime: 2015-11-30 16:46
+# @description:
+#   用于初始化数据
+# 
+# -----------------------------------------------------------------------------
+
+# 隐含要求初始化数据应该在此目录下
+dest_dir=/tmp/database
+
+cd $dest_dir
+
+md5sum -c md5sum
+ret=`echo $?`
+
+if [[ $ret != 0 ]]; then
+    exit 1
+fi
+
+DB_NAME={{ db_name }}
+
+if [[ -f char_authority.sql ]]; then
+    mysql $DB_NAME < init.sql
+else
+    exit 2
+fi
+
+if [[ -f char_authority.sql ]]; then
+    mysql $DB_NAME < svr_params.sql
+fi
+
+if [[ -f char_authority.sql ]]; then
+    mysql $DB_NAME < char_rank_params.sql
+fi
+
+#if [[ -f char_authority.sql ]]; then
+#    mysql $DB_NAME < char_authority.sql
+#fi
