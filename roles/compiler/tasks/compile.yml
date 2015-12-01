@@ -1,6 +1,12 @@
 ---
 # Compile Source
 #
+#- name: update source
+#  become: yes
+#  become_user: "{{ op_user }}"
+#  subversion: repo={{ source_repos }} dest={{ source_dir }} username={{ source_svn_user }} password={{ source_svn_password }}
+#  tags: "update_data"
+
 - name: Compile Source Code
   any_errors_fatal: true
   become: yes

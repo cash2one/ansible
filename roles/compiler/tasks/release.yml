@@ -10,21 +10,29 @@
   become: yes
   become_user: "{{ op_user }}"
   template: src=wyft.sh.j2 dest=/tmp/wyft.sh
+  tags: "update_data"
+
+- name: Copy rsync filter
+  copy: src=rsync.filter dest=/tmp
+  tags: "update_data"
 
 - name: Promote privi of script
   command: chmod 0755 /tmp/wyft.sh
+  tags: "update_data"
 
 - name: Prepare Program File
   become: yes
   become_user: "{{ op_user }}"
-  shell: /tmp/wyft.sh
+  shell: /tmp/wyft.sh &>/tmp/wyft.sh.log
   args:
       chdir: /tmp
+  tags: "update_data"
 
 - name: Commit To Intranet VCS
   become: yes
   become_user: "{{ op_user }}"
-  shell: svn add . && svn ci -m 'update' .
+  shell: svn add --force . && svn ci -m 'update' .
   args:
       chdir: "{{ release_dir }}"
+  tags: "update_data"
 
