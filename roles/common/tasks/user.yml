@@ -2,4 +2,9 @@
 # Add New User
 #
 - name: Add New User
-  user: name={{ username }} state=present
+  user: name={{ username }} state=present generate_ssh_key=yes
+
+- name: Add Authorize File
+  copy: src={{ user_authorized_key }} dest="/home/{{ username }}/.ssh/authorized_keys" owner={{ username }} group={{ username }} mode=0600
+  become: yes
+  become_user: "{{ username }}"

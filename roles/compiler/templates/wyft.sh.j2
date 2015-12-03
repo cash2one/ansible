@@ -63,8 +63,8 @@ copy_file() {
 	find . -path '*.svn*' -prune -o -type f -exec md5sum {} \; > ${TEMP_MD5SUM_FILE}
 	mv ${TEMP_MD5SUM_FILE} md5sum
 
-    cp -uf ../tools/service .
-    cp -uf ../tools/check .
+    #cp -uf ../tools/service .
+    #cp -uf ../tools/check .
 	cd -
 }
 

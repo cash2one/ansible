@@ -1,5 +1,5 @@
 ---
-#
+# notify handler
 #
 - name: start service
   command: supervisorctl -c /etc/supervisord.conf restart adminsvr

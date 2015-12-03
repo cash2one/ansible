@@ -1,9 +1,10 @@
 ---
 # 默认tasks
 #
-- include: ntp.yml
 - include: epel.yml
+- include: ntp.yml
 - include: subversion.yml
 - include: selinux.yml
 - include: pip.yml
 - include: supervisor.yml
+- include: user.yml

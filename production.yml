@@ -1,23 +1,23 @@
 ---
 # 部署产品
 #
-- hosts: database
-  vars:
-       data_dir: /var/lib/mysql       
-       master_server_id: 2
-       db_name: wyft
-       db_init_file: "" # 初始化SQL文件 initial_data_file.sql
-       new_db_username: viivgame
-       new_db_password: viivgame
-       allow_host: 10.1.%.%
-  roles:
-     - common
-     - database
-     - datamaster
+#- hosts: database
+#  vars:
+#       data_dir: /var/lib/mysql       
+#       master_server_id: 2
+#       db_name: wyft
+#       db_init_file: "" # 初始化SQL文件 initial_data_file.sql
+#       new_db_username: viivgame
+#       new_db_password: viivgame
+#       allow_host: 10.1.%.%
+#  roles:
+#     - common
+#     - database
+#     - datamaster
 
 - hosts: production
   vars:
-       repos: http://10.1.0.20/repos/release/wyft/trunk/server
+       repos_url: http://10.1.0.20/repos/release/wyft/trunk/server
        dest_dir: /home/server/wyft
        svn_user: ""
        svn_password: ""

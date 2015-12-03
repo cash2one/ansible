@@ -4,5 +4,6 @@
 - name: Install ntpdate
   yum: name=ntpdate state=present
 
+# 0 */8 * * * ntpdate 0.gentoo.pool.ntp.org
 - name: Install Cron schedule update time
-  cron: name="update time" hour=*/8 job="/usr/sbin/ntpdate 0.gentoo.pool.ntp.org"
+  cron: name="update time" minute=0 hour=*/8 job="/usr/sbin/ntpdate {{ ntp_server }}"

@@ -1,12 +1,6 @@
 ---
 # Install MySQL Server
 #
-- name: Copy MySQL Repos File
-  copy: src=mysql-community-release-el6-5.noarch.rpm dest=/tmp/
-
-- name: Install MySQL Repos
-  yum: name=/tmp/mysql-community-release-el6-5.noarch.rpm state=present
-
 - name: Install MySQL Server
   yum: name=mysql-server state=latest
 

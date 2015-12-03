@@ -4,7 +4,7 @@
 - name: Checkout From Intranet VCS
   become: yes
   become_user: "{{ op_user }}"
-  subversion: repo={{ repos }} dest={{ release_dir }} username={{ svn_user }} password={{ svn_password }}
+  subversion: repo={{ repos_url }} dest={{ release_dir }} username={{ svn_user }} password={{ svn_password }}
 
 - name: Copy Script
   become: yes

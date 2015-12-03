@@ -11,7 +11,7 @@
        compile_script: ./rebuild.sh           # 使用游戏相关的编译脚本
        bin_src_dir: /home/builder/ZS_BUILD/bin/server
 
-       repos: http://10.1.0.20/repos/release/wyft
+       repos_url: http://10.1.0.20/repos/release/wyft
        release_dir: /home/builder/wyft
        svn_user: ""
        svn_password: ""

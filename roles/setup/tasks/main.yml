@@ -14,7 +14,14 @@
   args:
     chdir: /tmp
 
-#- name: Delete Files
-#  command: rm -f quickcfg.py {{ xml_cfg_file }}
-#  args:
-#    chdir: /tmp
+- name: Delete Files
+  command: rm -f quickcfg.py {{ xml_cfg_file }}
+  args:
+    chdir: /tmp
+
+# 配置产品，并启动
+- name: Install configure file
+  template: src=adminsvrd.j2 dest=/etc/supervisord.d/adminsvrd.ini
+  notify:
+  - start service
+

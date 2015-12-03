@@ -1,0 +1,5 @@
+---
+ntp_server: 0.gentoo.pool.ntp.org
+ssh_host: 0.0.0.0
+ssh_port: 22
+username: viiv

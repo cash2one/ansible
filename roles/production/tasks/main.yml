@@ -1,5 +1,5 @@
 ---
 # Install Production
 #
-- include: user.yml
+- include: deps.yml
 - include: repos.yml

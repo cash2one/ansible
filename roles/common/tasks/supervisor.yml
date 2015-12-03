@@ -13,5 +13,9 @@
   copy: src=supervisord.conf dest=/etc/supervisord.conf
 
 # start supervisord
-#- name: start supervisord
-#  command: /usr/bin/supervisord
+- name: start supervisord when system boot
+  command: /usr/bin/supervisord -c /etc/supervisord.conf
+
+# start supervisord when system boot
+- name: start supervisord when system boot
+  command: echo "/usr/bin/supervisord" >> /etc/rc.local

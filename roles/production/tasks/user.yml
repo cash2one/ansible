@@ -1,5 +1,0 @@
----
-# Add New User
-#
-- name: Add New User
-  user: name={{ op_user }} state=present

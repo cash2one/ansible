@@ -1,0 +1,21 @@
+---
+# 安装依赖
+#
+- name: Install Dependence Library From Yum Repos
+  yum: name={{ item }} state=present
+  with_items:
+    - boost
+    - openssl098e
+    - lzo-minilzo
+
+- name: Copy Dependence RPM
+  copy: src={{ item }}  dest=/tmp
+  with_items:
+    - coredumper-1.2.1-1.x86_64.rpm
+    - ace-5.8.2-1.x86_64.rpm 
+
+- name: Install RPM Package
+  yum: name={{ item }} state=present
+  with_items:
+    - /tmp/coredumper-1.2.1-1.x86_64.rpm
+    - /tmp/ace-5.8.2-1.x86_64.rpm

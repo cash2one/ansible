@@ -1,0 +1,15 @@
+---
+# 安装其它通用依赖库
+#
+- name: Copy MySQL Repos File
+  copy: src=mysql-community-release-el6-5.noarch.rpm dest=/tmp/
+
+- name: Install MySQL Repos
+  yum: name=/tmp/mysql-community-release-el6-5.noarch.rpm state=present
+
+# latest 可能造成新旧服务器版本不一致
+- name: Install MySQL Libs
+  yum: name={{ item }} state=latest
+  with_items:
+     - mysql-community-libs
+     - mysql-community-libs-compat

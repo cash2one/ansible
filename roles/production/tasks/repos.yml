@@ -2,15 +2,10 @@
 # 从仓库checkout业务
 #
 - name: Checkout Production
-  subversion: repo={{ repos }} dest={{ dest_dir }} username={{ svn_user }} password={{ svn_password }}
+  subversion: repo={{ repos_url }} dest={{ dest_dir }} username={{ svn_user }} password={{ svn_password }}
   become: yes
   become_user: "{{ op_user }}"
   tags: "update_data"
-
-- name: Install configure file
-  template: src=adminsvrd.j2 dest=/etc/supervisord.d/adminsvrd.ini
-  notify:
-  - start service
 
 - name: Check the MD5sum, sha1sum etc
   any_errors_fatal: true
