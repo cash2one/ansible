@@ -1,21 +1,21 @@
 ---
 # install supervisor
 #
-- name: install supervisor
+- name: Install supervisor
   command: pip install supervisor
 
 # configure supervisor
-- name: create supervisor configure directory
+- name: Create supervisor configure directory
   file: path=/etc/supervisord.d state=directory
 
 # configure supervisor
-- name: configure supervisor
+- name: Configure supervisor
   copy: src=supervisord.conf dest=/etc/supervisord.conf
 
 # start supervisord
-- name: start supervisord when system boot
+- name: Start supervisord
   command: /usr/bin/supervisord -c /etc/supervisord.conf
 
 # start supervisord when system boot
-- name: start supervisord when system boot
+- name: Set supervisord start when system boot
   command: echo "/usr/bin/supervisord" >> /etc/rc.local

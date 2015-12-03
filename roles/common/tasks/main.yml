@@ -7,4 +7,5 @@
 - include: selinux.yml
 - include: pip.yml
 - include: supervisor.yml
+- include: libs.yml
 - include: user.yml
